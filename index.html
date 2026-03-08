@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>SmartQuiz AI</title>
+
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">🤖 SmartQuiz AI</div>
+
+<div>
+<button onclick="toggleTheme()">🌙</button>
+<a href="history.html">History</a>
+</div>
+
+</nav>
+
+<div class="hero">
+
+<h1>AI Powered Quiz Generator</h1>
+
+<p>Create quizzes instantly using AI</p>
+
+</div>
+
+<div class="config-card">
+
+<h2>Quiz Settings</h2>
+
+<label>Topic</label>
+<input id="topic" placeholder="Example: Java Programming">
+
+<label>Difficulty</label>
+
+<select id="difficulty">
+
+<option>Easy</option>
+<option>Medium</option>
+<option>Hard</option>
+
+</select>
+
+<label>Questions</label>
+<input id="count" type="number" value="5">
+
+<label>Time (minutes)</label>
+<input id="time" type="number" value="5">
+
+<button onclick="startQuiz()">Generate Quiz</button>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/ui.js"></script>
+
+</body>
+</html>
