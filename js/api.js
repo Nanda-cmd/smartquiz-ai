@@ -1,44 +1,42 @@
-const API_KEY="YOUR_GEMINI_API_KEY"
+const API_KEY="PASTE_YOUR_GEMINI_KEY"
 
 async function generateQuestions(topic,count,difficulty){
 
-const prompt=`
+const prompt = `
+Generate ${count} multiple choice questions about ${topic}.
+Difficulty: ${difficulty}.
 
-Generate ${count} MCQ questions about ${topic}
-Difficulty ${difficulty}
-
-Return JSON
+Return STRICT JSON like this:
 
 {
 "questions":[
 {
-"question":"",
-"options":["","","",""],
-"correct":"",
-"explanation":""
+"question":"...",
+"options":["A","B","C","D"],
+"correct":"A",
+"explanation":"..."
 }
 ]
 }
-
 `
 
-const response=await fetch(
+const response = await fetch(
 "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key="+API_KEY,
 {
 method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
+headers:{ "Content-Type":"application/json"},
 body:JSON.stringify({
-contents:[{
-parts:[{text:prompt}]
-}]
+contents:[{parts:[{text:prompt}]}]
 })
 }
 )
 
-const data=await response.json()
+const data = await response.json()
 
-return JSON.parse(data.candidates[0].content.parts[0].text)
+const text = data.candidates[0].content.parts[0].text
+
+const clean = text.replace(/```json|```/g,'')
+
+return JSON.parse(clean)
 
 }

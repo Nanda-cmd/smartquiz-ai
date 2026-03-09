@@ -1,17 +1,14 @@
 function saveResult(score,total){
 
-let history=JSON.parse(localStorage.getItem("history"))||[]
+let history = JSON.parse(localStorage.getItem("history")) || []
 
 history.push({
-
-score,
-total,
+score:score,
+total:total,
 date:new Date().toLocaleDateString()
-
 })
 
 localStorage.setItem("history",JSON.stringify(history))
-
 localStorage.setItem("lastScore",score)
 localStorage.setItem("lastTotal",total)
 
@@ -19,13 +16,19 @@ localStorage.setItem("lastTotal",total)
 
 function loadResult(){
 
-const score=localStorage.getItem("lastScore")
-const total=localStorage.getItem("lastTotal")
+const score = Number(localStorage.getItem("lastScore"))
+const total = Number(localStorage.getItem("lastTotal"))
 
-document.getElementById("score").innerText="Score: "+score+"/"+total
+document.getElementById("score").innerText =
+"Score: "+score+"/"+total
 
-const acc=(score/total)*100
+let acc=0
 
-document.getElementById("accuracy").innerText="Accuracy: "+acc+"%"
+if(total>0){
+acc=Math.round((score/total)*100)
+}
+
+document.getElementById("accuracy").innerText =
+"Accuracy: "+acc+"%"
 
 }

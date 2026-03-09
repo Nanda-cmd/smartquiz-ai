@@ -1,50 +1,60 @@
 let questions=[]
-let index=0
+let current=0
 let score=0
+let selected=null
 
-async function loadQuiz(){
+async function initQuiz(){
 
-const config=JSON.parse(localStorage.getItem("quizConfig"))
+const config = JSON.parse(localStorage.getItem("quizConfig"))
 
-const data=await generateQuestions(config.topic,config.count,config.difficulty)
+const data = await generateQuestions(
+config.topic,
+config.count,
+config.difficulty
+)
 
 questions=data.questions
 
-showQuestion()
+document.getElementById("loader").classList.add("hidden")
+document.getElementById("quizCard").classList.remove("hidden")
 
 startTimer(config.time*60)
 
+renderQuestion()
+
 }
 
-function showQuestion(){
+function renderQuestion(){
 
-const q=questions[index]
+selected=null
+
+const q=questions[current]
 
 document.getElementById("question").innerText=q.question
 
-const options=document.getElementById("options")
+const optionsDiv=document.getElementById("options")
 
-options.innerHTML=""
+optionsDiv.innerHTML=""
 
-q.options.forEach(option=>{
+q.options.forEach(opt=>{
 
-const btn=document.createElement("button")
+const div=document.createElement("div")
+div.className="option"
+div.innerText=opt
 
-btn.innerText=option
+div.onclick=function(){
 
-btn.onclick=function(){
+selected=opt
 
-if(option===q.correct){
-
+if(opt===q.correct){
 score++
-
 }
 
 document.getElementById("explanation").innerText=q.explanation
 
 }
 
-options.appendChild(btn)
+optionsDiv.appendChild(div)
 
 })
 
@@ -54,11 +64,10 @@ updateProgress()
 
 function nextQuestion(){
 
-index++
+if(current<questions.length-1){
 
-if(index<questions.length){
-
-showQuestion()
+current++
+renderQuestion()
 
 }else{
 
@@ -70,8 +79,7 @@ finishQuiz()
 
 function updateProgress(){
 
-const percent=((index+1)/questions.length)*100
-
+const percent=((current+1)/questions.length)*100
 document.getElementById("progress").style.width=percent+"%"
 
 }
