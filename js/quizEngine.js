@@ -40,6 +40,20 @@ score++
 
 }
 
+document.getElementById("explanation").innerText=q.explanation
+
+}
+
+options.appendChild(btn)
+
+})
+
+updateProgress()
+
+}
+
+function nextQuestion(){
+
 index++
 
 if(index<questions.length){
@@ -54,8 +68,18 @@ finishQuiz()
 
 }
 
-options.appendChild(btn)
+function updateProgress(){
 
-})
+const percent=((index+1)/questions.length)*100
+
+document.getElementById("progress").style.width=percent+"%"
+
+}
+
+function finishQuiz(){
+
+saveResult(score,questions.length)
+
+window.location.href="result.html"
 
 }

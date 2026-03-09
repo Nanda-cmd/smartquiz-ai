@@ -2,15 +2,15 @@ function startTimer(seconds){
 
 let time=seconds
 
-const interval=setInterval(()=>{
+const timer=setInterval(()=>{
 
-document.getElementById("timer").innerText="Time: "+time
+document.getElementById("timer").innerText="Time "+time
 
 time--
 
 if(time<0){
 
-clearInterval(interval)
+clearInterval(timer)
 
 finishQuiz()
 
