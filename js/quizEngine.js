@@ -83,11 +83,36 @@ const percent=((current+1)/questions.length)*100
 document.getElementById("progress").style.width=percent+"%"
 
 }
+function adjustDifficulty(){
+
+let config = JSON.parse(localStorage.getItem("quizConfig"))
+
+if(score/questions.length > 0.8){
+config.difficulty="Hard"
+}
+
+if(score/questions.length < 0.4){
+config.difficulty="Easy"
+}
+
+localStorage.setItem("quizConfig",JSON.stringify(config))
+
+}
 
 function finishQuiz(){
 
 saveResult(score,questions.length)
+adjustDifficulty()
 
 window.location.href="result.html"
 
 }
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="1") chooseOption(0)
+if(e.key==="2") chooseOption(1)
+if(e.key==="3") chooseOption(2)
+if(e.key==="4") chooseOption(3)
+
+})

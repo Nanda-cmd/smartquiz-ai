@@ -6,10 +6,6 @@
 <title>SmartQuiz AI</title>
 
 <link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/animations.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 </head>
 
@@ -17,53 +13,33 @@
 
 <nav class="navbar">
 
-<div class="logo">🤖 SmartQuiz AI</div>
+<div>🤖 SmartQuiz AI</div>
 
 <div>
 
+<a href="dashboard.html">Analytics</a>
 <a href="history.html">History</a>
-<button onclick="toggleTheme()">🌙</button>
 
 </div>
 
 </nav>
 
-<div class="hero">
+<div class="chat-container">
 
-<h1>AI Quiz Generator</h1>
-<p>Create quizzes instantly with AI</p>
+<div id="chatBox" class="chat-box"></div>
 
-</div>
+<div class="chat-input">
 
-<div class="config-card">
+<input id="prompt" placeholder="Ask AI to create quiz (Example: Physics basics quiz)">
 
-<h2>Quiz Settings</h2>
-
-<label>Topic</label>
-<input id="topic" placeholder="Example: Java Programming">
-
-<label>Difficulty</label>
-
-<select id="difficulty">
-
-<option>Easy</option>
-<option>Medium</option>
-<option>Hard</option>
-
-</select>
-
-<label>Questions</label>
-<input id="count" type="number" value="5">
-
-<label>Time (minutes)</label>
-<input id="time" type="number" value="5">
-
-<button onclick="startQuiz()">Generate Quiz</button>
+<button onclick="generateQuiz()">Generate</button>
 
 </div>
 
-<script src="js/config.js"></script>
-<script src="js/ui.js"></script>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/chat.js"></script>
 
 </body>
 
